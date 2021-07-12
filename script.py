@@ -1,7 +1,6 @@
 import pandas as pd
 from selenium import webdriver
 import pickle
-import selenium.webdriver
 from datetime import date
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
@@ -78,7 +77,7 @@ df_old = pd.read_csv('file/software_emp.csv')
 # add scrap
 
 df_appended = df_old.append(df)
-df_appended.to_csv("file/software_emp.csv")
+df_appended.to_csv("file/software_emp.csv", index=False)
 
 #update file
 file2 = drive.CreateFile({'id': '1eX7BYCDEMPynodr5KWeu5JUWzgkiu-C7'})
