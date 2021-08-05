@@ -6,7 +6,7 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
 
-            
+       
 driver = webdriver.Chrome('chrome/chromedriver.exe')
 
 #get cookies
@@ -16,16 +16,16 @@ driver = webdriver.Chrome('chrome/chromedriver.exe')
 driver.get('https://www.linkedin.com')
 
 #add cookies
-cookies = pickle.load(open("chrome/chromedata/cookies.pkl", "rb"))
+cookies = pickle.load(open('chrome/chromedata/cookies.pkl', 'rb'))
 
 for cookie in cookies:
     driver.add_cookie(cookie)
     
 
-driver.get('https://www.linkedin.com/jobs/search/?alertAction=viewjobs&distance=50&f_PP=114987161%2C103813819%2C108739038%2C114457591&geoId=108739038&keywords=software&location=Buenos%20Aires%2C%20Buenos%20Aires%20Province%2C%20Argentina')
+driver.get('https://www.linkedin.com/jobs/search/?distance=25&geoId=108739038&keywords=software&location=Buenos%20Aires%2C%20Buenos%20Aires%20Province%2C%20Argentina')
 
 #get value
-val = driver.find_elements_by_css_selector("small")[0].text
+val = driver.find_elements_by_css_selector('small')[0].text
 
 # parse value
 
@@ -43,7 +43,7 @@ driver.close()
 gauth = GoogleAuth()
 
 # Try to load saved client credentials
-gauth.LoadCredentialsFile("mycreds.txt")
+gauth.LoadCredentialsFile('mycreds.txt')
 if gauth.credentials is None:
     # Authenticate if they're not there
     gauth.LocalWebserverAuth()
@@ -55,7 +55,7 @@ else:
     gauth.Authorize()
     
 # Save the current credentials to a file
-gauth.SaveCredentialsFile("mycreds.txt")
+gauth.SaveCredentialsFile('mycreds.txt')
 
 gauth.LocalWebserverAuth()
 
@@ -81,6 +81,6 @@ df_appended.to_csv("file/software_emp.csv", index=False)
 
 #update file
 file2 = drive.CreateFile({'id': '1eX7BYCDEMPynodr5KWeu5JUWzgkiu-C7'})
-file2.SetContentFile("file/software_emp.csv")
+file2.SetContentFile('file/software_emp.csv')
 file2.Upload() 
 
